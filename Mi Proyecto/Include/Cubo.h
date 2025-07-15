@@ -1,19 +1,27 @@
+// Cubo.h
 #pragma once
-#include "Cuadrado.h"
+#include "Figura.h"
+#include <stdexcept>
 
-class Cubo : public Cuadrado {
+class Cubo : public Figura {
+private:
+    float lado;
+
 public:
     Cubo(float l)
-        : Cuadrado(l) {
-        nombre = "Cubo";
-    }
-    ~Cubo() override {}
-
-    float Volumen() const {
-        return lado * lado * lado;
+        : Figura("Cubo"), lado(l)
+    {
+        if (l <= 0.0f)
+            throw std::invalid_argument("Cubo::Cubo(): el lado debe ser > 0");
     }
 
-    float Surface() const {
-        return 6 * lado * lado;
+    // Área total = 6 caras * (lado × lado)
+    float CalcularArea() const override {
+        return 6.0f * lado * lado;
+    }
+
+    // Perímetro total = 12 aristas * lado
+    float CalcularPerimetro() const override {
+        return 12.0f * lado;
     }
 };

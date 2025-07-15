@@ -1,19 +1,19 @@
 #pragma once
-#include "SentinelLinkedList.h"
+#include "LinkedList.h"
 
-template <typename T>
+template<typename T>
 class LQueue {
 private:
-    SentinelLinkedList<T> data;
+    LinkedList<T> data;
 
 public:
-    LQueue() {}
+    LQueue() = default;
 
-    int GetCount() {
+    int GetCount() const {
         return data.GetCount();
     }
 
-    void Enqueue(T value) {
+    void Enqueue(const T& value) {
         data.PushBack(value);
     }
 
@@ -21,7 +21,11 @@ public:
         return data.PopFront();
     }
 
-    T Front() {
+    T& Front() {
         return data.Front();
+    }
+
+    bool IsEmpty() const {
+        return data.IsEmpty();
     }
 };
